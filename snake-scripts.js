@@ -33,7 +33,7 @@ var rand_free_position = function(snake, xy) {
 // snake body segments
 var move_snake = function(snake) {
   var sum = function(a, b) { return a + b; };
-  var head_new_position = map(sum, [snake.direction, snake.body[0]]);
+  var head_new_position = map(sum, snake.direction, snake.body[0]);
   snake.body.unshift(head_new_position);
   snake.body.pop();
   return snake;

@@ -38,17 +38,27 @@ var rand_nth = function(arr) {
   return arr[rand_pos];
 }
 
-var map = function(f, arrays) {
-  var acc = [];
-  // loop based on the lengh of the first array
-  for (var i = 0; i < arrays[0].length; i++) {
-    // get each arrays' elt in turn
-    var items = arrays.map(function(arr) { return arr[i]; });
-    // apply the fn on each elt of the arrays and push the result to acc
-    acc.push(f.apply(null, items));
+// takes a function and one or more arrays and returns
+// the result of applying the function to each elements of the arrays
+var map = function() {
+  var f,
+      arrays = [],
+      acc = [];
+
+  for (var k in arguments) {
+    if (!f)
+      f = arguments[k];
+    else
+      arrays.push(arguments[k]);
   }
+
+  for (var i = 0; i < arrays[0].length; i++) {
+    var elts = arrays.map(function(arr) { return arr[i]; });
+    acc.push(f.apply(null, elts));
+  }
+
   return acc;
-};
+}
 
 var contains = function(arr_set, arr) {
   return arr_set.some(function(node) {
